@@ -14,13 +14,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import de.hhn.labapp.persistence.todo.viewmodel.TodoListViewModel
 
 @Composable
 fun TodoList() {
-    val viewModel = TodoListViewModel()
+    val viewModel = TodoListViewModel(LocalContext.current)
 
     Scaffold(
         floatingActionButton = {
@@ -40,7 +41,7 @@ fun TodoList() {
                     .fillMaxWidth()
                     .padding(horizontal = 4.dp,)
                     .padding(bottom = 16.dp),
-                onQueryChanged = {},
+                onQueryChanged = viewModel::search,
             )
             TodoItemsList(viewModel)
         }
